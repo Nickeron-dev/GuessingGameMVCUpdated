@@ -39,17 +39,18 @@ public class Controller {
 			}
 			
 			if (isValid(inputNumber)) {
+				boolean isLower = inputNumber < model.getRandomNumber();
+				putInAttempts(inputNumber, isLower);
+				view.printMessage(isLower 
+						? View.INPUTTED_VALUE_IS_LOWER : View.INPUTTED_VALUE_IS_LARGER);
+				
 				if (inputNumber < model.getRandomNumber()) {
-					view.printMessage(View.INPUTTED_VALUE_IS_LOWER);
-					model.setMinPossibleInput(inputNumber); // check
-					putInAttempts(inputNumber, true);
+					model.setMinPossibleInput(inputNumber);
 					continue point;
 				}
 				
 				if (inputNumber > model.getRandomNumber()) {
-					view.printMessage(View.INPUTTED_VALUE_IS_LARGER);
 					model.setMaxPossibleInput(inputNumber);
-					putInAttempts(inputNumber, false);
 					continue point;
 				}
 			}
